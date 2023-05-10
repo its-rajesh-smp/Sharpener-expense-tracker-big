@@ -1,11 +1,15 @@
-import React from 'react';
-import "./App.css"
-import Login from '../Page/Login/Login';
+import React from "react";
+import "./App.css";
+import Login from "../Page/Login/Login";
+import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
+import MyRoutes from "../Routes/MyRoutes";
 
 function App(props) {
   return (
-    <div className=' App-div '>
-      <Login />
+    <div className=" App-div ">
+      <BrowserRouter>
+        <MyRoutes />
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,9 +1,11 @@
 import React from "react";
-import { Route } from "react-router-dom/cjs/react-router-dom";
+import { Redirect, Route } from "react-router-dom/cjs/react-router-dom";
 import Login from "../Page/Login/Login";
 import Homepage from "../Page/Home Page/Homepage";
 import PrivateRoutes from "./PrivateRoute";
 import ConditionalRoute from "./ConditionalRoute";
+import ProfilePage from "../Page/Profile Page/ProfilePage";
+import Header from "../Components/Header/Header";
 
 function MyRoutes(props) {
   return (
@@ -15,7 +17,16 @@ function MyRoutes(props) {
         secondPath="/"
         secondComponent={Login}
       />
-      <PrivateRoutes path="/home" component={Homepage} auth={true} />
+
+      <PrivateRoutes auth={true}>
+        <Route path="/" component={Header} />
+        <Route path="/home" component={Homepage} />
+        <Route path="/profile" component={ProfilePage} />
+      </PrivateRoutes>
+
+      <Route path="*">
+        <Redirect to="/" />
+      </Route>
     </>
   );
 }

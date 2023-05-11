@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import Login from "../Page/Login/Login";
 import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 import MyRoutes from "../Routes/MyRoutes";
 

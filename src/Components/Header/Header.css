@@ -1,0 +1,13 @@
+.Header-div__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: antiquewhite;
+}
+.Header-div__header__p {
+  font-weight: 900;
+  color: blue;
+  background-color: aquamarine;
+  padding: 5px;
+  border-radius: 30px;
+}

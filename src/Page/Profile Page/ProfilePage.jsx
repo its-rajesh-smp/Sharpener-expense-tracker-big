@@ -6,8 +6,15 @@ import LoginContext from "../../Context/LoginCTX";
 function ProfilePage(props) {
   const loginCTX = useContext(LoginContext);
   const history = useHistory();
-  const nameRef = useRef();
-  const imageRef = useRef();
+
+  const [name, setName] = useState(
+    loginCTX.userAuth.displayName !== undefined
+      ? loginCTX.userAuth.displayName
+      : ""
+  );
+  const [url, setUrl] = useState(
+    loginCTX.userAuth.photoUrl !== undefined ? loginCTX.userAuth.photoUrl : ""
+  );
   const [loader, setLoader] = useState(false);
   /* -------------------------------------------------------------------------- */
   /*                                   GO BACK                                  */
@@ -23,19 +30,28 @@ function ProfilePage(props) {
     setLoader(true);
     loginCTX.updateUserProfile(
       {
-        displayName: nameRef.current.value,
-        photoUrl: imageRef.current.value,
+        displayName: name,
+        photoUrl: url,
       },
-      setLoader
+      setLoader,
+      onCloseBtnHandeler
     );
   };
 
   return (
     <div className=" ProfilePage-div ">
       <button onClick={onCloseBtnHandeler}>Cancle</button>
-      <input ref={nameRef} type="text" placeholder="Your Name" name="" id="" />
       <input
-        ref={imageRef}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        type="text"
+        placeholder="Your Name"
+        name=""
+        id=""
+      />
+      <input
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
         type="text"
         placeholder="Photo URL "
         name=""

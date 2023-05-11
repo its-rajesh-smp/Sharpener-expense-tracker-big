@@ -5,7 +5,7 @@ import LoginContext from "../Context/LoginCTX";
 
 function ConditionalRoute(props) {
   const loginCTX = useContext(LoginContext);
-  if (loginCTX.userAuth.registered === true) {
+  if (loginCTX.userAuth.isAuth === true) {
     return (
       <Route
         exact={props.exact !== undefined ? true : false}

@@ -3,7 +3,7 @@ import LoginContext from "../Context/LoginCTX";
 function PrivateRoutes(props) {
   const LoginCTX = useContext(LoginContext);
 
-  if (LoginCTX.userAuth.registered === true) {
+  if (LoginCTX.userAuth.isAuth === true) {
     return <>{props.children}</>;
   }
 }

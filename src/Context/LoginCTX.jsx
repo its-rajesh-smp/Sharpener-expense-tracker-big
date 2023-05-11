@@ -5,6 +5,7 @@ import {
   AUTH_SIGNIN,
   UPDATE_USER,
   GET_USER,
+  VERIFY_USER,
 } from "../assets/assets";
 
 const LoginContext = React.createContext({
@@ -89,8 +90,26 @@ export const LoginContextProvider = ({ children }) => {
     setLoader(false);
   };
 
+  /* -------------------------------------------------------------------------- */
+  /*                                 VERIFY USER                                */
+  /* -------------------------------------------------------------------------- */
+  const verifyUser = async (setLoader) => {
+    try {
+      const { data } = await axios.post(VERIFY_USER, {
+        idToken: userAuth.idToken,
+        requestType: "VERIFY_EMAIL",
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoader(false);
+  };
+
   return (
-    <LoginContext.Provider value={{ loginAuth, userAuth, updateUserProfile }}>
+    <LoginContext.Provider
+      value={{ loginAuth, userAuth, updateUserProfile, verifyUser }}
+    >
       {children}
     </LoginContext.Provider>
   );

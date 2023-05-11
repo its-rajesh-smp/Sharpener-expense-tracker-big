@@ -16,6 +16,12 @@ function ProfilePage(props) {
     loginCTX.userAuth.photoUrl !== undefined ? loginCTX.userAuth.photoUrl : ""
   );
   const [loader, setLoader] = useState(false);
+  const [isVerified, setIsverified] = useState(
+    loginCTX.userAuth.emailVerified !== undefined &&
+      loginCTX.userAuth.emailVerified
+      ? true
+      : ""
+  );
   /* -------------------------------------------------------------------------- */
   /*                                   GO BACK                                  */
   /* -------------------------------------------------------------------------- */
@@ -36,6 +42,14 @@ function ProfilePage(props) {
       setLoader,
       onCloseBtnHandeler
     );
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                                  ON VERIFY                                 */
+  /* -------------------------------------------------------------------------- */
+  const onVerifyBtnHandeler = () => {
+    loginCTX.verifyUser(setLoader);
+    setLoader(true);
   };
 
   return (
@@ -63,6 +77,10 @@ function ProfilePage(props) {
       ) : (
         <h1>LOADING...</h1>
       )}
+
+      <button onClick={onVerifyBtnHandeler} disabled={isVerified}>
+        {isVerified ? "VERIFIED" : "VERIFY USER"}
+      </button>
     </div>
   );
 }

@@ -40,7 +40,7 @@ export const LoginContextProvider = ({ children }) => {
         const { data } = await axios.post(GET_USER, {
           idToken: localAuth.idToken,
         });
-        console.log(data);
+
         setUserAuth({ ...localAuth, ...data.users[0], isAuth: true });
       } catch (error) {
         console.log(error);
@@ -48,6 +48,7 @@ export const LoginContextProvider = ({ children }) => {
     }
     fireAuth();
   }, []);
+
   /* -------------------------------------------------------------------------- */
   /*                          LOGIN/CREATE NEW ACCOUNT                          */
   /* -------------------------------------------------------------------------- */
@@ -57,7 +58,7 @@ export const LoginContextProvider = ({ children }) => {
         type === "SIGNIN" ? AUTH_SIGNIN : AUTH_SIGNUP,
         enteredData
       );
-      console.log(data);
+
       setUserAuth((p) => {
         return { ...p, ...data, isAuth: true };
       });
@@ -106,9 +107,28 @@ export const LoginContextProvider = ({ children }) => {
     setLoader(false);
   };
 
+  /* -------------------------------------------------------------------------- */
+  /*                                 LOGOUT USER                                */
+  /* -------------------------------------------------------------------------- */
+
+  const logOutUser = () => {
+    localStorage.clear("data");
+    setUserAuth({
+      displayName: "",
+      email: "",
+      expiresIn: "",
+      idToken: "",
+      kind: "",
+      localId: "",
+      refreshToken: "",
+      registered: false,
+      isAuth: false,
+    });
+  };
+
   return (
     <LoginContext.Provider
-      value={{ loginAuth, userAuth, updateUserProfile, verifyUser }}
+      value={{ loginAuth, userAuth, updateUserProfile, verifyUser, logOutUser }}
     >
       {children}
     </LoginContext.Provider>

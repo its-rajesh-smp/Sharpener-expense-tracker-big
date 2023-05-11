@@ -5,6 +5,7 @@ import LoginContext from "../Context/LoginCTX";
 
 function ConditionalRoute(props) {
   const loginCTX = useContext(LoginContext);
+  console.log("SDFKJSDBFSJHD");
   if (loginCTX.userAuth.isAuth === true) {
     return (
       <Route

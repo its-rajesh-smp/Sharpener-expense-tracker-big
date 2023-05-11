@@ -54,15 +54,27 @@ export const LoginContextProvider = ({ children }) => {
   /* -------------------------------------------------------------------------- */
   const loginAuth = async (enteredData, type, setLoader) => {
     try {
-      const { data } = await axios.post(
+      const loginResponse = await axios.post(
         type === "SIGNIN" ? AUTH_SIGNIN : AUTH_SIGNUP,
         enteredData
       );
 
+      const userResponse =
+        type === "SIGNIN"
+          ? await axios.post(GET_USER, {
+              idToken: loginResponse.data.idToken,
+            })
+          : null;
+
       setUserAuth((p) => {
-        return { ...p, ...data, isAuth: true };
+        return {
+          ...p,
+          ...loginResponse.data,
+          isAuth: true,
+          ...(userResponse !== null ? userResponse.data.users[0] : undefined),
+        };
       });
-      localStorage.setItem("data", JSON.stringify(data));
+      localStorage.setItem("data", JSON.stringify(loginResponse.data));
     } catch (error) {
       alert(error.response.data.error.message);
     }

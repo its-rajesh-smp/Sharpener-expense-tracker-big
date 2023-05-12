@@ -4,3 +4,4 @@ export const AUTH_SIGNIN = `https://identitytoolkit.googleapis.com/v1/accounts:s
 export const UPDATE_USER = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`
 export const GET_USER = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`
 export const VERIFY_USER = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`
+export const FOGOT_PASSEMAIL = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`

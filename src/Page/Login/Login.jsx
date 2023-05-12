@@ -1,15 +1,25 @@
 import React, { useContext, useRef, useState } from "react";
 import "./Login.css";
 import LoginContext from "../../Context/LoginCTX";
+import {
+  Link,
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom";
 
 function Login(props) {
   const loginCTX = useContext(LoginContext);
+  const history = useHistory();
 
   const emailInputRef = useRef();
   const passInputRef = useRef();
   const confPassInputRef = useRef();
 
-  const [login, setLogin] = useState(false);
+  // checking if our link ".../login/login" that means user want to go do  login else send them to  create new account state
+  const parms = useParams();
+  const [login, setLogin] = useState(
+    Object.keys(parms).length === 0 ? false : true
+  );
   const [loader, setLoader] = useState(false);
 
   /* -------------------------------------------------------------------------- */
@@ -44,7 +54,8 @@ function Login(props) {
       loginCTX.loginAuth(
         enteredInputData,
         login ? "SIGNIN" : "SIGNUP",
-        setLoader
+        setLoader,
+        history
       );
     }
   };
@@ -80,7 +91,12 @@ function Login(props) {
             id="confPassword"
           />
         )}
-        {login && <p>Forgot Password</p>}
+        {login && (
+          <Link to="/forgotpassword">
+            <p>Forgot Password</p>
+          </Link>
+        )}
+
         <button onClick={onBtnClickHandeler}>
           {login ? "LOGIN" : "SIGN UP"}
         </button>

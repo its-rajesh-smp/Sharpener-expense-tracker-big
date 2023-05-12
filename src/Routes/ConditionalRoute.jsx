@@ -5,11 +5,10 @@ import LoginContext from "../Context/LoginCTX";
 
 function ConditionalRoute(props) {
   const loginCTX = useContext(LoginContext);
-  console.log("SDFKJSDBFSJHD");
-  if (loginCTX.userAuth.isAuth === true) {
+  if (loginCTX.userAuth.isAuth === props.auth) {
     return (
       <Route
-        exact={props.exact !== undefined ? true : false}
+        exact={true}
         path={props.firstPath}
         component={props.firstComponent}
       />
@@ -17,7 +16,7 @@ function ConditionalRoute(props) {
   } else {
     return (
       <Route
-        exact={props.exact !== undefined ? true : false}
+        exact={true}
         path={props.secondPath}
         component={props.secondComponent}
       />

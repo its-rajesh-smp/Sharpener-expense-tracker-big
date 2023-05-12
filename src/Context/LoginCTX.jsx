@@ -6,6 +6,7 @@ import {
   UPDATE_USER,
   GET_USER,
   VERIFY_USER,
+  FOGOT_PASSEMAIL,
 } from "../assets/assets";
 
 const LoginContext = React.createContext({
@@ -52,7 +53,7 @@ export const LoginContextProvider = ({ children }) => {
   /* -------------------------------------------------------------------------- */
   /*                          LOGIN/CREATE NEW ACCOUNT                          */
   /* -------------------------------------------------------------------------- */
-  const loginAuth = async (enteredData, type, setLoader) => {
+  const loginAuth = async (enteredData, type, setLoader, history) => {
     try {
       const loginResponse = await axios.post(
         type === "SIGNIN" ? AUTH_SIGNIN : AUTH_SIGNUP,
@@ -65,7 +66,7 @@ export const LoginContextProvider = ({ children }) => {
               idToken: loginResponse.data.idToken,
             })
           : null;
-
+      history.replace("/");
       setUserAuth((p) => {
         return {
           ...p,
@@ -138,9 +139,34 @@ export const LoginContextProvider = ({ children }) => {
     });
   };
 
+  /* -------------------------------------------------------------------------- */
+  /*                               FORGOT PASSWORD                              */
+  /* -------------------------------------------------------------------------- */
+  const forgotUserPassword = async (enteredEmail, setLoader, redirect) => {
+    try {
+      const { data } = await axios.post(FOGOT_PASSEMAIL, {
+        requestType: "PASSWORD_RESET",
+        email: enteredEmail,
+      });
+      console.log(data);
+
+      redirect();
+    } catch (error) {
+      alert(error.response.data.error.message);
+    }
+    setLoader(false);
+  };
+
   return (
     <LoginContext.Provider
-      value={{ loginAuth, userAuth, updateUserProfile, verifyUser, logOutUser }}
+      value={{
+        loginAuth,
+        userAuth,
+        updateUserProfile,
+        verifyUser,
+        logOutUser,
+        forgotUserPassword,
+      }}
     >
       {children}
     </LoginContext.Provider>

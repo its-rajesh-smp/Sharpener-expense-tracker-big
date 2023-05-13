@@ -5,3 +5,9 @@ export const UPDATE_USER = `https://identitytoolkit.googleapis.com/v1/accounts:u
 export const GET_USER = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`
 export const VERIFY_USER = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`
 export const FOGOT_PASSEMAIL = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`
+
+
+/* -------------------------------------------------------------------------- */
+/*                         FIREBASE REALTIME DATABASE                         */
+/* -------------------------------------------------------------------------- */
+export const DATABASE = "https://sharpener-expensetracker-default-rtdb.asia-southeast1.firebasedatabase.app/"

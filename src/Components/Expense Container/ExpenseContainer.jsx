@@ -5,12 +5,11 @@ import ExpenseContext from "../../Context/ExpenseCTX";
 
 function ExpenseContainer(props) {
   const expenseCTX = useContext(ExpenseContext);
-  console.log(expenseCTX);
 
   return (
     <div className=" ExpenseContainer-div ">
       {expenseCTX.expensess.map((val) => {
-        return <Expence key={Math.random()} data={val} />;
+        return <Expence key={val.id} data={val} />;
       })}
     </div>
   );

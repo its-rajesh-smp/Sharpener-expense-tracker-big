@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom";
 function Header(props) {
   const loginCTX = useContext(LoginContext);
   const history = useHistory();
-
+  console.log("HEADER");
   /* -------------------------------------------------------------------------- */
   /*                                  ON LOGOUT                                 */
   /* -------------------------------------------------------------------------- */

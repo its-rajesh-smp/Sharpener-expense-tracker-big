@@ -1,0 +1,6 @@
+.Expence-div {
+  display: flex;
+  gap: 50px;
+  background-color: gainsboro;
+  margin-bottom: 20px;
+}

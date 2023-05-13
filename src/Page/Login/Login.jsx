@@ -11,6 +11,7 @@ function Login(props) {
   const loginCTX = useContext(LoginContext);
   const history = useHistory();
 
+  console.log("skdfhgsjdfgj");
   const emailInputRef = useRef();
   const passInputRef = useRef();
   const confPassInputRef = useRef();

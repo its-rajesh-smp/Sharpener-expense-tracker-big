@@ -55,8 +55,61 @@ export const ExpenseContextProvider = ({ children }) => {
     }
   };
 
+  /* -------------------------------------------------------------------------- */
+  /*                              DELETE EXPENCESS                              */
+  /* -------------------------------------------------------------------------- */
+  const deleteExpencess = async (expenceId) => {
+    try {
+      const responce = await axios.delete(
+        `${DATABASE}/${loginCTX.userAuth.email
+          .replace("@", "")
+          .replace(".", "")}/expencess/${expenceId}.json`
+      );
+      console.log(responce, expenceId);
+      setExpensess((prev) => {
+        return prev.filter((val) => {
+          if (val.id !== expenceId) {
+            return val;
+          }
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                               EDIT EXPENCESS                               */
+  /* -------------------------------------------------------------------------- */
+  const editExpencess = async (
+    editedData,
+    expenceid,
+    setDesc,
+    setprice,
+    setCata,
+    setIsEditable
+  ) => {
+    try {
+      const { data } = await axios.put(
+        `${DATABASE}/${loginCTX.userAuth.email
+          .replace("@", "")
+          .replace(".", "")}/expencess/${expenceid}.json`,
+        editedData
+      );
+
+      setIsEditable(false);
+      setDesc(data.desc);
+      setprice(data.price);
+      setCata(data.cata);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <ExpenseContext.Provider value={{ addExpencess, expensess }}>
+    <ExpenseContext.Provider
+      value={{ addExpencess, expensess, deleteExpencess, editExpencess }}
+    >
       {children}
     </ExpenseContext.Provider>
   );
